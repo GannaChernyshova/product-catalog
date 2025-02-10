@@ -29,11 +29,8 @@ jobs:
       - name: Compile
         run: mvn clean compile
 
-      - name: Unit Tests
-        run: mvn test
-
       - name: Integration Tests
-        run: mvn verify -DskipUnitTests
+        run: mvn verify jacoco:report
 
       - name: Upload Test Results
         if: always()
