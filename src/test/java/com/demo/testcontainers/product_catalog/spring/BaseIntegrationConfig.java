@@ -9,9 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 
-import java.util.Random;
-
-import static io.restassured.RestAssured.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(
@@ -23,7 +20,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         properties = {"spring.kafka.consumer.auto-offset-reset=earliest"})
 // We have reused the ContainersConfig class that we created to define all the required containers.
 @Import(TestcontainersConfiguration.class)
-public class BaseIntegrationTest {
+public class BaseIntegrationConfig {
     static final Faker faker = new Faker();
 
     @LocalServerPort

@@ -11,7 +11,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-class ProductCatalogApplicationTests extends BaseIntegrationTest {
+class ProductCatalogApplicationTests extends BaseIntegrationConfig {
 	@BeforeEach
 	void setUp() {
 		repository.deleteAll(); // Clean DB before each test
