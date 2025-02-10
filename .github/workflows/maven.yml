@@ -29,6 +29,11 @@ jobs:
       - name: Compile
         run: mvn clean compile
 
+      - name: Setup Testcontainers Cloud Client
+        uses: atomicjar/testcontainers-cloud-setup-action@v1
+        with:
+          token: ${{ secrets.TC_CLOUD_TOKEN }}
+
       - name: Integration Tests
         run: mvn verify jacoco:report
 
@@ -41,13 +46,6 @@ jobs:
             target/surefire-reports/
             target/failsafe-reports/
 
-      - name: Upload Coverage Reports
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-reports
-          path: target/site/jacoco/
-
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
@@ -55,18 +53,3 @@ jobs:
           files: |
             target/surefire-reports/*.xml
             target/failsafe-reports/*.xml
-
-      - name: Add Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: target/site/jacoco/jacoco.xml
-          badge: true
-          format: markdown
-          output: both
-
-      - name: Add Coverage PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          recreate: true
-          path: code-coverage-results.md
