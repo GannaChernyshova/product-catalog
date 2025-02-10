@@ -101,27 +101,27 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.11</version>
-				<executions>
-					<!-- Prepares the property pointing to the JaCoCo runtime agent -->
-					<execution>
-						<id>prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
+<!--			<plugin>-->
+<!--				<groupId>org.jacoco</groupId>-->
+<!--				<artifactId>jacoco-maven-plugin</artifactId>-->
+<!--				<version>0.8.11</version>-->
+<!--				<executions>-->
+<!--					&lt;!&ndash; Prepares the property pointing to the JaCoCo runtime agent &ndash;&gt;-->
+<!--					<execution>-->
+<!--						<id>prepare-agent</id>-->
+<!--						<goals>-->
+<!--							<goal>prepare-agent</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
 
-					<!-- Creates the test report -->
-					<execution>
-						<id>report</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
+<!--					&lt;!&ndash; Creates the test report &ndash;&gt;-->
+<!--					<execution>-->
+<!--						<id>report</id>-->
+<!--						<phase>verify</phase>-->
+<!--						<goals>-->
+<!--							<goal>report</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
 
 					<!-- Enforces minimum code coverage -->
 <!--					<execution>-->
@@ -149,8 +149,8 @@
 <!--							</rules>-->
 <!--						</configuration>-->
 <!--					</execution>-->
-				</executions>
-			</plugin>
+<!--				</executions>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
