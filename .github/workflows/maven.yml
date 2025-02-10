@@ -1,5 +1,10 @@
 name: Java CI/CD Pipeline
 
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
 on:
   push:
     branches:
