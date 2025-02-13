@@ -25,11 +25,29 @@ public class RunMe {
         int mongoPort = 27017;
         String mongoConnectionUrlTemplate = "mongodb://%s:%d/%s";
 
+        var mongoContainer = new GenericContainer<>("mongo:latest")
+                .withExposedPorts(mongoPort)
+                .withEnv(MONGO_INITDB_USER, "testUser")
+                .withEnv(MONGO_INITDB_PASSWORD, "testPass")
+                .withEnv(MONGO_INITDB_DB, "testDB");
+        mongoContainer.start();
+        String connectionString = String.format(mongoConnectionUrlTemplate,
+                mongoContainer.getHost(),
+                mongoContainer.getMappedPort(mongoPort),
+                "testDB"
+        );
+
+        System.out.println("connection URL is " + connectionString);
+
+
+
     }
 
     @Test
     void demoModule() {
-
+        var mongoContainer = new MongoDBContainer("mongo:latest");
+        mongoContainer.start();
+        System.out.println("connection URL is " + mongoContainer.getReplicaSetUrl());
     }
 
     @Test
