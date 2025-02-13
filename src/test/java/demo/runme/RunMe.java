@@ -6,8 +6,8 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.containers.Network;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.kafka.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
@@ -16,29 +16,20 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class RunMe {
+    static final String MONGO_INITDB_USER = "MONGO_INITDB_ROOT_USERNAME";
+    static final String MONGO_INITDB_PASSWORD = "MONGO_INITDB_ROOT_PASSWORD";
+    static final String MONGO_INITDB_DB = "MONGO_INITDB_DATABASE";
 
     @Test
-    void demoGenericContainer () {
-        var postgres     = new GenericContainer<>(DockerImageName.parse("postgres:16.2"))
-                 .withExposedPorts(5432)
-                 .withEnv("POSTGRES_DB", "testdb")
-                 .withEnv("POSTGRES_USER", "user")
-                 .withEnv("POSTGRES_PASSWORD", "password");
-        postgres.start();
+    void demoGenericContainer() {
+        int mongoPort = 27017;
+        String mongoConnectionUrlTemplate = "mongodb://%s:%d/%s";
 
-        String jdbcUrl = String.format("jdbc:postgresql://%s:%d/testdb",
-                postgres.getHost(),
-                postgres.getMappedPort(5432));
-
-        System.out.println("PostgreSQL is ready!");
-        System.out.println("JDBC URL: " + jdbcUrl);
     }
 
     @Test
-    void demoModule () {
-        var postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:16-alpine"));
-        postgres.start();
-        System.out.println("JDBC URL: " + postgres.getJdbcUrl());
+    void demoModule() {
+
     }
 
     @Test
